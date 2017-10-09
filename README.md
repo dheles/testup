@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: test-setup }
+         - { role: testup }
 
 License
 -------
