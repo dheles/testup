@@ -9,7 +9,7 @@
 - name: give me the facts
   debug:
     msg: "{{ facts }}"
-    verbosity: 1
+    verbosity: 2
 
 - name: check role path
   debug:
@@ -24,6 +24,23 @@
   debug:
     msg: "{{ ansible_base_path }}"
     verbosity: 1
+
+- name: check for existing Gemfile
+  stat:
+    path: "{{ testup_relative_path_to_root }}Gemfile"
+  register: gemfile
+
+- name: create Gemfile
+  command: "bundle init"
+  args:
+    chdir: "{{ testup_relative_path_to_root }}"
+  when: testup_manage_gemfile and not gemfile.stat.exists
+
+- name: template Gemfile
+  blockinfile:
+    block:  "{{ lookup('template', testup_gemfile_template) }}"
+    dest: "{{ testup_relative_path_to_root }}Gemfile"
+    marker: "# {mark} testup"
 
 - name: install gems for testing
   bundler:
@@ -51,9 +68,9 @@
         version: "{{ testup_cucumber_repo_version }}"
       when: testup_cucumber_repo != ""
 
-    - name: gitignore features directory
+    - name: gitignore features directory (and possibly Gemfile)
       blockinfile:
-        block:  "{{ testup_cucumber_dir }}"
+        block:  "{{ lookup('template', testup_gitignore_template) }}"
         dest: "{{ testup_relative_path_to_root }}.gitignore"
         marker: "# {mark} testup"
 
