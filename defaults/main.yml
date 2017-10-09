@@ -1,1 +1,13 @@
 ---
+testup_local:                   true
+# how to get from *the playbook that calls this role* to the project root
+testup_relative_path_to_root:   "../"
+testup_deploy_dir:              ""
+testup_cucumber_vars_template:  "default_cucumber_vars.rb"
+testup_capybara:                true
+testup_cucumber:                true
+testup_cucumber_dir:            "features/"
+testup_cucumber_repo:           "https://github.com/dheles/catalyst-cucumber-tests" # NOTE: replace ""
+testup_cucumber_repo_version:   "HEAD"
+testup_serverspec:              false
+testup_serverspec_repo:         ""
