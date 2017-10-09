@@ -6,7 +6,7 @@ Sets up tests in an Ansible project
 Requirements
 ------------
 
-none
+bundler
 
 Role Variables
 --------------
