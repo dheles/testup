@@ -54,5 +54,35 @@
         dest: "{{ testup_relative_path_to_root }}{{ testup_cucumber_dir }}support/test_vars.rb"
         force: true
 
+    - block:
+      - name: create default step definition
+        template:
+          src: "{{ testup_cucumber_step_template }}"
+          dest: "{{ testup_relative_path_to_root }}{{ testup_cucumber_dir }}step_definitions/test_vars.rb"
+
+      - name: create default feature
+        template:
+          src: "{{ testup_cucumber_feature_template }}"
+          dest: "{{ testup_relative_path_to_root }}{{ testup_cucumber_dir }}test_vars.feature"
+      when: testup_cucumber_repo == ""
+
+    # begin default playbook block
+    - block:
+      - name: create playbooks and templates dirs
+        file:
+          path: "{{ testup_relative_path_to_root }}playbooks/templates"
+          state: directory
+
+      - name: create default test vars template
+        template:
+          src: "{{ testup_cucumber_vars_template }}"
+          dest: "{{ testup_relative_path_to_root }}playbooks/templates/test_vars.rb"
+
+      - name: create default tests playbook
+        template:
+          src: "{{ testup_cucumber_playbook_template }}"
+          dest: "{{ testup_relative_path_to_root }}playbooks/tests_run.yml"
+    # end default playbook block
+
   when: testup_cucumber
 # end cucumber
