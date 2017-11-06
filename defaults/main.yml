@@ -1,7 +1,7 @@
 ---
 testup_local:                   true
 # how to get from *the playbook that calls this role* to the project root
-testup_relative_path_to_root:   "../"
+testup_relative_path_to_root:   "" # "../"
 testup_deploy_dir:              ""
 testup_gemfile_template:        "default_gemfile.j2"
 testup_gitignore_template:      "default_gitignore_block.j2"
