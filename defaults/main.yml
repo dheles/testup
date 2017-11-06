@@ -10,7 +10,7 @@ testup_cucumber_vars_template:  "default_cucumber_vars.rb"
 testup_capybara:                true
 testup_cucumber:                true
 testup_cucumber_dir:            "features/"
-testup_cucumber_repo:           "https://github.com/dheles/catalyst-cucumber-tests" # NOTE: replace ""
+testup_cucumber_repo:           ""
 testup_cucumber_repo_version:   "HEAD"
 testup_serverspec:              false
 testup_serverspec_repo:         ""
